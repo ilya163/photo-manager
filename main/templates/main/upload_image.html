@@ -1,0 +1,18 @@
+{% extends 'mymanager/home.html' %}
+
+{% block title %}
+<h1>Загрузить фото</h1>
+{% endblock %}
+
+{% block auth %}
+<a href="{% url 'logout' %}">Выйти</a><br>
+{% endblock %}
+
+
+{% block content %}
+<form method = "post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Загрузить</button>
+</form>
+{% endblock %}

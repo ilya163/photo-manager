@@ -1,0 +1,9 @@
+# PyCharm files
+.idea
+*__pycache__/
+*.pyc
+
+#Common files
+env
+media/images*
+

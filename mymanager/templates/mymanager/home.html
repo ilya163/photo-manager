@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+
+{% block startconnect %}
+{% endblock %}
+</head>
+<body>
+
+{% block title %}
+<h1>Менеджер фотографий</h1>
+{% endblock %}
+
+{% if messages %}
+	{% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+{% endif %}
+
+{% block auth %}
+<a href="{% url 'login' %}">Войти</a>
+<a href="{% url 'reg' %}">Зарегистрироваться</a>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+{% block endconnect %}
+{% endblock %}
+</body>
+</html>

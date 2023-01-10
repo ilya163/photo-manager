@@ -1,0 +1,28 @@
+{% extends 'mymanager/home.html' %}
+
+{% block title %}
+<h1>Фото Менеджер</h1>
+{% endblock %}
+
+{% block auth %}
+<a href="{% url 'logout' %}">Выйти</a><br>
+{% endblock %}
+
+{% if messages %}
+	{% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+{% endif %}
+
+{% block content %}
+	<a href="{% url 'upload_image' %}">Загрузить фото</a><br>
+	<a href="/main?sort={{ sort }}">Сортировка по названию</a><br>
+
+	{% if images %}
+		{% for x in images %}
+			<a href="{% url 'remove_image' x.id %}">Удалить</a>
+			<img src="{{ x.image_url.url }}"  alt="Lights" style="width:20%">
+		{% endfor %}
+	{% endif %}
+	
+{% endblock %}

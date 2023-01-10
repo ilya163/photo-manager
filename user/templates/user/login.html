@@ -1,0 +1,24 @@
+{% extends 'mymanager/home.html' %}
+
+
+{% block title %}
+<h1>Форма аутентификации</h1>
+{% endblock %}
+
+{% if messages %}
+	{% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+{% endif %}
+
+{% block auth %}{% endblock %}
+
+
+{% block content %}
+	<form method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		<input type="text" name="username" placeholder="Введите логин"><br>
+		<input type="password" name="password" placeholder="Введите пароль"><br>
+		<button type="submit">Войти</button>
+	</form>
+{% endblock %}
