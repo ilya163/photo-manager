@@ -14,15 +14,22 @@
     {% endfor %}
 {% endif %}
 
+
 {% block content %}
+
 	<a href="{% url 'upload_image' %}">Загрузить фото</a><br>
 	<a href="/main?sort={{ sort }}">Сортировка по названию</a><br>
-
-	{% if images %}
-		{% for x in images %}
-			<a href="{% url 'remove_image' x.id %}">Удалить</a>
-			<img src="{{ x.image_url.url }}"  alt="Lights" style="width:20%">
-		{% endfor %}
-	{% endif %}
+    <input type="text" id="sort_title"><br>
+    <div id="gallery">
+        {% if images %}
+            {% for x in images %}
+                <div data-title="{{ x.title }}">
+                    <span>{{ x.title }}</span>
+                    <a href="{% url 'remove_image' x.id %}">Удалить</a>
+                    <img src="{{ x.image_url.url }}"  alt="Lights" style="width:20%">
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 	
 {% endblock %}

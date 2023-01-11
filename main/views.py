@@ -1,21 +1,18 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib import messages
-from django.conf import settings
-from django.http import HttpResponse
-from django.forms import modelformset_factory
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import ImageForm
 from .models import Image
 
-
-from datetime import datetime
 from django.utils import timezone
+from django.http import JsonResponse
 
-@login_required  
+@csrf_exempt
+@login_required
 def mainContent(request):
-
     images = Image.objects.all().filter(reporter=request.user)
     sort = "asc"
     if request.method == 'GET':
@@ -26,12 +23,22 @@ def mainContent(request):
             images = Image.objects.filter(reporter=request.user).order_by("-title")
             sort = "asc"
 
+    if request.method == "POST":
+        return JsonResponse({"title": request.POST.get("filter_title")})
+
     context = {
         "images": images,
-        "sort": sort
-    }
+        "sort": sort,
+     }
+
+    print(context)
     return render(request, "main/main.html", context)
 
+# def getFilterTitle(self, **kwargs):
+#     context = super().getFilterTitle(**kwargs)
+#     images = Image.objects.all()
+#     context["filter_title"] = json.dumps(images)
+#     return context
 def removeImage(request, id):
     rm = get_object_or_404(Image, id=id)
     if rm.image_url:
@@ -51,7 +58,7 @@ def uploadImage(request):
             messages.info(request, "Ваше фото загружено")
             return redirect("main")
         else:
-            form["error"]= "Ошибка при валидации формы"
+            form["error"] = "Ошибка при валидации формы"
             return render(request, "main/upload_image.html", {"form": form})
     else:
         form = ImageForm()

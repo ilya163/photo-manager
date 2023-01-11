@@ -1,6 +1,7 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 {% block startconnect %}
 {% endblock %}
 </head>
@@ -22,10 +23,13 @@
 {% endblock %}
 
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
+
 
 {% block endconnect %}
 {% endblock %}
+
+<script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
