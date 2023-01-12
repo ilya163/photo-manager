@@ -31,7 +31,6 @@ def mainContent(request):
         "sort": sort,
      }
 
-    print(context)
     return render(request, "main/main.html", context)
 
 # def getFilterTitle(self, **kwargs):

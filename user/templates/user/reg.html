@@ -6,20 +6,30 @@
 {% endblock %}
 
 
-{% if messages %}
-		{% for message in messages %}
-	    <li>{{ message }}</li>
-	    {% endfor %}
-	{% endif %}
-	
-{% block auth %}{% endblock %}
+
+
+{% block auth %}
+{% endblock %}
 
 {% block content %}
-
+<div class="row">
 	<form method="post" action="{% url 'reg' %}">
 		{% csrf_token %}
-		<input type="text" name="username" placeholder="Введите логин"><br>
-		<input type="text" name="password" placeholder="Введите пароль"><br>
-		<button type="submit">Зарегистрироваться</button>
+        <div class="container">
+            <div class="row">
+		        <div class="col-md-4">
+                    {% if info %}
+                        <span>{{ info }}</span>
+                    {% endif %}
+                    <input type="text" class="form-control" placeholder="Введите логин" name="username" aria-label="Username"><br>
+                    <input type="password" class="form-control" placeholder="Введите пароль"  name="password" aria-label="Password"><br>
+                    <button type="submit" class="btn btn-light">Зарегистрироваться</button>
+                 </div>
+            </div>
+        </div>
 	</form>
+</div>
 {% endblock %}
+
+
+

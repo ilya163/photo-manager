@@ -17,8 +17,17 @@
 {% block content %}
 	<form method="post" action="{% url 'login' %}">
 		{% csrf_token %}
-		<input type="text" name="username" placeholder="Введите логин"><br>
-		<input type="password" name="password" placeholder="Введите пароль"><br>
-		<button type="submit">Войти</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    {% if info %}
+                        <span>{{ info }}</span>
+                    {% endif %}
+                     <input type="text" class="form-control" placeholder="Введите логин" name="username" aria-label="Username"><br>
+                     <input type="text" class="form-control" placeholder="Введите пароль"  name="password" aria-label="Password"><br>
+                     <button type="submit" class="btn btn-light">Войти</button>
+                </div>
+            </div>
+        </div>
 	</form>
 {% endblock %}
