@@ -21,12 +21,12 @@
         <a href="/main?sort={{ sort }}">Сортировка по названию</a><br>
         <input type="text" id="sort_title"><br>
     </div>
-    <div class="row gallery">
+    <div id="gallery" class="row">
         {% if images %}
             {% for x in images %}
                 <div class="col-3 photo-item text-center" data-title="{{ x.title }}">
                     <h4>{{ x.title }}</h4>
-                    <div><img src="{{ x.image_url.url }}"></div>
+                    <img src="{{ x.image_url.url }}">
                     <a href="{% url 'remove_image' x.id %}">Удалить</a>
                 </div>
             {% endfor %}
