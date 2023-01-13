@@ -22,10 +22,12 @@ body{
 	height:100%;
 	background: white;
 }
+
 #gallery{
 	padding:0 10px 10px 10px;
 
 }
+
 #gallery img{
 	margin:0 auto;
 	width:200px;
