@@ -2,33 +2,34 @@
 
 
 {% block title %}
-<h1>Форма регистрации</h1>
+    <h1>Форма регистрации</h1>
 {% endblock %}
-
-
 
 
 {% block auth %}
+    <a href="{% url 'home' %}">Назад</a>
 {% endblock %}
 
 {% block content %}
-<div class="row">
-	<form method="post" action="{% url 'reg' %}">
-		{% csrf_token %}
-        <div class="container">
-            <div class="row">
-		        <div class="col-md-4">
-                    {% if info %}
-                        <span>{{ info }}</span>
-                    {% endif %}
-                    <input type="text" class="form-control" placeholder="Введите логин" name="username" aria-label="Username"><br>
-                    <input type="password" class="form-control" placeholder="Введите пароль"  name="password" aria-label="Password"><br>
-                    <button type="submit" class="btn btn-light">Зарегистрироваться</button>
-                 </div>
+    <div class="row">
+        <form method="post" action="{% url 'reg' %}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if info %}
+                            <span>{{ info }}</span>
+                        {% endif %}
+                        <input type="text" class="form-control" placeholder="Введите логин" name="username"
+                               aria-label="Username"><br>
+                        <input type="password" class="form-control" placeholder="Введите пароль" name="password"
+                               aria-label="Password"><br>
+                        <button type="submit" class="btn btn-light">Зарегистрироваться</button>
+                    </div>
+                </div>
             </div>
-        </div>
-	</form>
-</div>
+        </form>
+    </div>
 {% endblock %}
 
 

@@ -9,7 +9,11 @@ body{
 .header{
 	background: lightyellow;
 	height:150px;
+	padding: 0 30px;
  }
+
+.header div:first-child{text-align:left}
+.header div:last-child{text-align:right}
 
 .menu{
 	height:50px;

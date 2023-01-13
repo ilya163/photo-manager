@@ -1,47 +1,48 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Фотогаллерея</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
 
-    {% block startconnect %}
-    {% endblock %}
-
-  </head>
-  <body>
-  	<div class="container text-center">
-	    <div class="row header">
-		    <div class="col-md-2">
-                {% block title %}
-		    	<div class="p-3"><h1>Менеджер фотографий</h1></div>
-                {% endblock %}
-		    </div>
-		    <div class="col-md-7"></div>
-		    <div class="col-md-3 p-3">
-                {% block auth %}
-                    <a href="{% url 'login' %}" class="link-primary">Войти</a>
-                    <a href="{% url 'reg' %}" class="link-primary">Зарегистрироваться</a>
-
-                {% endblock %}
-		    </div>
-		</div>
-    </div>
-    <div class="container menu"></div>
-    <div class="container content">
-            {% block content %}
-                <div class="row">
-                    {% if info %}
-                        <span>{{ info }}</span>
-                    {% endif %}
-                </div>
+    <div class="row header">
+        <div class="col-md-3">
+            {% block title %}
+                <div class="p-3"><h1>Менеджер фотографий</h1></div>
             {% endblock %}
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3 p-3">
+            {% block auth %}
+                <a href="{% url 'login' %}" class="link-primary">Войти</a>
+                <a href="{% url 'reg' %}" class="link-primary">Зарегистрироваться</a>
+            {% endblock %}
+        </div>
     </div>
+</div>
+<div class="container menu"></div>
+<div class="container content">
+    {% block content %}
+        <div class="row">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endblock %}
+</div>
 
-    <script src="{% static 'js/script.js'%}"></script>
-  </body>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
 </html>
