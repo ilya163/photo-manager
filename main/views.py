@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from django.http import JsonResponse
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .forms import ImageForm
 from .models import Image
@@ -12,21 +13,28 @@ from .models import Image
 @csrf_exempt
 @login_required
 def mainContent(request):
-    """ Отображение контента галереи"""
-    images = Image.objects.all().filter(reporter=request.user)
-    sort = "asc"
-    if request.method == 'GET':
-        if request.GET.get("sort") == "asc":
-            images = Image.objects.filter(reporter=request.user).order_by("title")
-            sort = "desc"
-        elif request.GET.get("sort") == "desc":
-            images = Image.objects.filter(reporter=request.user).order_by("-title")
-            sort = "asc"
-    if request.method == "POST":
+    """ Отображение контента галереи """
+    if request.GET.get("sort") == "asc":
+        images = Image.objects.filter(reporter=request.user).order_by("title")
+        sort = "desc"
+    else:
+        images = Image.objects.filter(reporter=request.user).order_by("-title")
+        sort = "asc"
+
+
+    paginator = Paginator(images, 3)
+    pages_list = paginator.object_list
+    page_number = request.GET.get('page')
+    images = paginator.get_page(page_number)
+
+    if request.POST.get("filter_title"):
         return JsonResponse({"title": request.POST.get("filter_title")})
+
     context = {
         "images": images,
         "sort": sort,
+        "paginator": paginator,
+        "pages_list": pages_list,
     }
     return render(request, "main/main.html", context)
 

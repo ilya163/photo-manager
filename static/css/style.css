@@ -38,6 +38,11 @@ body{
 	height:200px;
 }
 
+.pagination{
+	text-align:center;
+	display:block;
+}
+
 .photo-item{margin:20px 0;}
 .photo-item a,h4,img{display:block;}
 

@@ -34,5 +34,31 @@
                 </div>
             {% endfor %}
         {% endif %}
+
+
+        {% if paginator.num_pages > 1 %}
+            <div class="pagination">
+                <div class="block_pagination">
+                    {% if images.has_previous %}
+{#                        <a href="?page=1">&laquo; first</a>#}
+                        <a href="?page={{ images.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="list_pages">
+                        {% for page in paginator.page_range %}
+                            <a href="?page={{ page }}">{{ page }}</a>
+                        {% endfor %}
+                    </span>
+                    {% if images.has_next %}
+                        <a href="?page={{ images.next_page_number }}">next</a>
+{#                        <a href="?page={{ images.paginator.num_pages }}">last &raquo;</a>#}
+                    {% endif %}
+                </div>
+                <div class="view_pagination">
+                    <span class="current">
+                        Page {{ images.number }} of {{ images.paginator.num_pages }}.
+                    </span>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
